@@ -5,8 +5,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
 
   return (
     <div className="topbarContainer">
@@ -55,6 +59,9 @@ export default function Topbar() {
             className="topbarImg"
           />
         </Link>
+        <li className="topListItem" onClick={handleLogout}>
+          {user && "LOGOUT"}
+        </li>
       </div>
     </div>
   );
